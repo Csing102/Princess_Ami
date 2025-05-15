@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For Princess Ami</title>
+  <style>
+    body {
+      background: #111;
+      color: #ff69b4; /* Pretty pink! */
+      font-family: monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-size: 2rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="text"></div>
+
+  <script>
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const targetText = "I LOVE YOU PRINCESS AMI";
+
+    let interval = null;
+    let iteration = 0;
+
+    const textElement = document.getElementById("text");
+
+    function decode() {
+      interval = setInterval(() => {
+        textElement.innerText = targetText
+          .split("")
+          .map((char, i) => {
+            if (i < iteration) return targetText[i];
+            if (char === " ") return " ";
+            return letters[Math.floor(Math.random() * letters.length)];
+          })
+          .join("");
+
+        iteration += 1 / 2;
+
+        if (iteration >= targetText.length) {
+          clearInterval(interval);
+        }
+      }, 30);
+    }
+
+    decode();
+  </script>
+</body>
+</html>
